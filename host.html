@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#30050c">
+<title>Host Portal | Hozaifa & Nayema Wedding Link Generator</title>
+<style>
+:root{--wine:#30050c;--wine2:#4c0b19;--gold:#e9c77f;--gold2:#b98436;--cream:#fff1d9;--ink:#45111a}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(ellipse at top,#4c0b19 0,#30050c 55%,#150005 100%);
+  color:var(--cream);
+  font-family:Georgia,"Times New Roman",serif;
+  padding:40px 16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.container{
+  width:min(100%,680px);
+  margin:0 auto;
+}
+.header{
+  text-align:center;
+  margin-bottom:32px;
+}
+.crest{
+  font-size:2rem;
+  color:var(--gold);
+  letter-spacing:4px;
+  margin-bottom:8px;
+}
+.badge{
+  display:inline-block;
+  border:1px solid var(--gold2);
+  padding:4px 14px;
+  border-radius:999px;
+  background:#e9c77f15;
+  color:var(--gold);
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  margin-bottom:12px;
+}
+h1{
+  font-size:clamp(1.8rem,5vw,2.6rem);
+  font-style:italic;
+  font-weight:400;
+  color:#f8dda0;
+  margin:0 0 8px;
+  line-height:1.2;
+}
+.subtitle{
+  color:#e8cfb0;
+  font-size:.95rem;
+  margin:0;
+}
+.card{
+  background:linear-gradient(135deg,#3c0712dd,#200007ee);
+  border:1px solid var(--gold2);
+  border-radius:16px;
+  padding:28px 24px;
+  box-shadow:0 10px 40px #00000066;
+  margin-bottom:24px;
+}
+.card-title{
+  font-size:1.25rem;
+  font-style:italic;
+  color:var(--gold);
+  margin:0 0 14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.desc{
+  font-size:.88rem;
+  color:#f5dfba;
+  line-height:1.6;
+  margin:0 0 20px;
+}
+.form-group{
+  display:flex;
+  gap:10px;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+}
+input[type="text"],textarea{
+  flex:1;
+  min-width:220px;
+  background:#1a0006;
+  border:1px solid #a77b3c;
+  border-radius:8px;
+  padding:12px 14px;
+  color:#fff3dc;
+  font-size:1rem;
+  font-family:inherit;
+  outline:none;
+}
+input[type="text"]:focus,textarea:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 10px #e9c77f33;
+}
+input::placeholder,textarea::placeholder{
+  color:#9a785b;
+}
+.gold-btn{
+  border:1px solid #f2d58e;
+  background:linear-gradient(135deg,#ffe6a5,#b77a2b);
+  color:#33060d;
+  padding:12px 22px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:.92rem;
+  letter-spacing:.03em;
+  white-space:nowrap;
+  transition:transform .2s,filter .2s;
+  font-family:inherit;
+}
+.gold-btn:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.08);
+}
+.result-box{
+  margin-top:20px;
+  padding:18px;
+  background:#140005;
+  border:1px solid #b9843680;
+  border-radius:10px;
+}
+.result-box.hidden{
+  display:none;
+}
+.result-label{
+  font-size:.82rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--gold);
+  margin-bottom:8px;
+  display:block;
+}
+.link-display-row{
+  display:flex;
+  gap:8px;
+  margin-bottom:14px;
+  flex-wrap:wrap;
+}
+.link-input{
+  flex:1;
+  min-width:200px;
+  background:#26010a!important;
+  color:#ffe3a0!important;
+  font-size:.85rem!important;
+}
+.copy-btn{
+  border:1px solid var(--gold);
+  background:#4c0b19;
+  color:var(--gold);
+  padding:10px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:.85rem;
+  white-space:nowrap;
+  transition:background .2s;
+  font-family:inherit;
+}
+.copy-btn:hover{
+  background:#681326;
+  color:#fff;
+}
+.action-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.wa-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#25d366;
+  color:#fff;
+  text-decoration:none;
+  padding:11px 18px;
+  border-radius:8px;
+  font-weight:bold;
+  font-size:.88rem;
+  transition:filter .2s;
+}
+.wa-btn:hover{
+  filter:brightness(1.1);
+  color:#fff;
+}
+.preview-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#ffffff15;
+  border:1px solid var(--gold2);
+  color:var(--gold);
+  text-decoration:none;
+  padding:11px 18px;
+  border-radius:8px;
+  font-size:.88rem;
+  transition:background .2s;
+}
+.preview-btn:hover{
+  background:#ffffff25;
+  color:#fff;
+}
+.recent-list{
+  margin-top:20px;
+  display:grid;
+  gap:10px;
+}
+.recent-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#1a0006;
+  border:1px solid #5a1d29;
+  padding:10px 14px;
+  border-radius:8px;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.recent-name{
+  font-weight:bold;
+  color:#ffe3a0;
+  font-size:.9rem;
+}
+.recent-actions{
+  display:flex;
+  gap:8px;
+}
+.recent-btn{
+  background:none;
+  border:1px solid var(--gold2);
+  color:var(--gold);
+  padding:5px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:.78rem;
+  text-decoration:none;
+  font-family:inherit;
+}
+.recent-btn:hover{
+  background:#e9c77f20;
+  color:#fff;
+}
+.footer-nav{
+  text-align:center;
+  margin-top:20px;
+}
+.footer-link{
+  color:var(--gold);
+  font-size:.9rem;
+  text-decoration:underline;
+}
+.footer-link:hover{
+  color:#fff;
+}
+</style>
+</head>
+<body>
+<div class="container">
+ <div class="header">
+  <div class="crest" aria-hidden="true">✧ ❦ ✧</div>
+  <div class="badge">Host Management Portal</div>
+  <h1>Hozaifa &amp; Nayema</h1>
+  <p class="subtitle">Generate &amp; Share Personalized Guest Wedding Invitation Links</p>
+ </div>
+
+ <div class="card">
+  <h2 class="card-title">✦ Generate Guest Link</h2>
+  <p class="desc">Enter any guest's name below. The generated link will automatically personalize the invitation greeting (e.g. <em>"Dear Rahul Sharma ❤️"</em>) and display only their wedding invitation details.</p>
+  
+  <div class="form-group">
+   <input type="text" id="guestNameInput" placeholder="Enter guest name (e.g. Rahul Sharma, Priya & Family)" autofocus>
+   <button type="button" class="gold-btn" id="generateBtn">Generate Link ✦</button>
+  </div>
+
+  <div class="result-box hidden" id="resultBox">
+   <span class="result-label">Personalized Invitation Link</span>
+   <div class="link-display-row">
+    <input type="text" id="generatedUrlInput" class="link-input" readonly>
+    <button type="button" class="copy-btn" id="copyBtn">Copy 📋</button>
+   </div>
+   <div class="action-buttons">
+    <a href="#" id="waShareBtn" target="_blank" rel="noopener noreferrer" class="wa-btn">Share via WhatsApp 💬</a>
+    <a href="#" id="previewBtn" target="_blank" rel="noopener noreferrer" class="preview-btn">Preview Guest View ↗</a>
+   </div>
+  </div>
+ </div>
+
+ <div class="card" id="recentCard" style="display:none">
+  <h2 class="card-title">✦ Recently Generated Links</h2>
+  <div class="recent-list" id="recentList"></div>
+ </div>
+
+ <div class="footer-nav">
+  <a href="/" class="footer-link">← Go to Public Wedding Invitation Website</a>
+ </div>
+</div>
+
+<script>
+const guestNameInput = document.getElementById('guestNameInput');
+const generateBtn = document.getElementById('generateBtn');
+const resultBox = document.getElementById('resultBox');
+const generatedUrlInput = document.getElementById('generatedUrlInput');
+const copyBtn = document.getElementById('copyBtn');
+const waShareBtn = document.getElementById('waShareBtn');
+const previewBtn = document.getElementById('previewBtn');
+const recentCard = document.getElementById('recentCard');
+const recentList = document.getElementById('recentList');
+
+const recentGuests = [];
+
+function getBaseUrl() {
+  const origin = window.location.origin && window.location.origin !== 'null' ? window.location.origin : '';
+  return origin + '/';
+}
+
+function generateLink() {
+  const name = guestNameInput.value.trim();
+  if (!name) {
+    alert('Please enter a guest name.');
+    guestNameInput.focus();
+    return;
+  }
+
+  const link = `${getBaseUrl()}?guest=${encodeURIComponent(name)}#rsvp`;
+  generatedUrlInput.value = link;
+  resultBox.classList.remove('hidden');
+
+  // Compose WhatsApp invitation message
+  const waMessage = `Dear ${name} ❤️,\n\nWith immense joy, we warmly invite you to celebrate the wedding union of Hozaifa Sheikh & Nayema!\n\n📅 Date: Thursday, 19 November 2026\n✨ Occasion: Nikah & Reception\n\nPlease open your personalized wedding invitation here:\n${link}`;
+  
+  waShareBtn.href = `https://wa.me/?text=${encodeURIComponent(waMessage)}`;
+  previewBtn.href = link;
+
+  // Add to recent list
+  if (!recentGuests.some(g => g.name.toLowerCase() === name.toLowerCase())) {
+    recentGuests.unshift({ name, link, waMessage });
+    renderRecent();
+  }
+}
+
+function renderRecent() {
+  if (recentGuests.length === 0) {
+    recentCard.style.display = 'none';
+    return;
+  }
+  recentCard.style.display = 'block';
+  recentList.innerHTML = '';
+  recentGuests.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'recent-item';
+    row.innerHTML = `
+      <span class="recent-name">${item.name}</span>
+      <div class="recent-actions">
+        <button type="button" class="recent-btn" onclick="copyText('${item.link.replace(/'/g, "\\'")}', this)">Copy 📋</button>
+        <a href="https://wa.me/?text=${encodeURIComponent(item.waMessage)}" target="_blank" rel="noopener noreferrer" class="recent-btn" style="background:#25d36633;border-color:#25d366">WhatsApp 💬</a>
+        <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="recent-btn">Preview ↗</a>
+      </div>
+    `;
+    recentList.appendChild(row);
+  });
+}
+
+window.copyText = async function(text, btn) {
+  try {
+    await navigator.clipboard.writeText(text);
+    const orig = btn.textContent;
+    btn.textContent = 'Copied! ✓';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  } catch {
+    const temp = document.createElement('input');
+    temp.value = text;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand('copy');
+    document.body.removeChild(temp);
+    const orig = btn.textContent;
+    btn.textContent = 'Copied! ✓';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  }
+};
+
+copyBtn.addEventListener('click', () => {
+  window.copyText(generatedUrlInput.value, copyBtn);
+});
+
+generateBtn.addEventListener('click', generateLink);
+guestNameInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    generateLink();
+  }
+});
+</script>
+</body>
+</html>

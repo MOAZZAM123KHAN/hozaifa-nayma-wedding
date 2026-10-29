@@ -68,43 +68,21 @@ section{padding:72px 20px;text-align:center}.section-title{font-size:clamp(2rem,
  <div class="venue-card"><div style="font-size:2.7rem;color:#9b6b2c" aria-hidden="true">⌖</div><h3>A Place for Our Memories</h3><p>Add a venue photo or exact Google Maps link when the location is confirmed.</p></div>
 </div></section>
 
-<section class="rsvp" id="rsvp"><div class="fade"><p class="eyebrow">Your Presence Is Our Present</p><h2 class="section-title" style="color:var(--gold)">Kindly RSVP</h2>
+<section class="rsvp" id="rsvp"><div class="fade"><p class="eyebrow">A Cordial Invitation</p><h2 class="section-title" style="color:var(--gold)">Wedding Invitation</h2>
  <div class="greeting-card" id="guestGreetingCard">
   <div class="greeting-ornament" aria-hidden="true">✧ ❦ ✧</div>
-  <h3 class="personalized-greeting" id="guestGreetingTitle">Dear <span id="guestDisplayName">Esteemed Guest</span>,</h3>
-  <p class="greeting-sub">you're invited to our special day ❤️</p>
-  <button type="button" class="greeting-change-btn" id="changeGuestBtn">Not <span id="btnGuestName">you</span>? Click to change</button>
- </div>
- <form class="rsvp-form" id="rsvpForm">
-  <label for="attendance">Will you join us?<select id="attendance" name="attendance" required style="display:block;width:100%;margin-top:6px;border:1px solid #a77b3c;border-radius:8px;background:#30050c;color:#fff3dc;padding:12px"><option value="">Choose an option</option><option value="Joyfully accepts">Joyfully accepts</option><option value="Regretfully declines">Regretfully declines</option></select></label>
-  <label for="guestCount">Number of guests (including you)<input id="guestCount" name="guestCount" type="number" min="1" max="20" value="1" required></label>
-  <label for="message">A message for the couple (optional)<textarea id="message" name="message" rows="3" placeholder="Write a short note"></textarea></label>
-  <div class="rsvp-actions"><button class="gold-btn" type="submit">Send RSVP via WhatsApp →</button></div>
-  <p class="note" id="rsvpNote">Your personalized RSVP confirmation is sent directly via WhatsApp.</p>
- </form>
- <div class="link-generator" id="linkGenerator">
-  <button type="button" class="generator-toggle" id="toggleGenerator" aria-expanded="false">
-   <span class="generator-toggle-title">✦ Host Tool: Generate Guest Invitation Links</span>
-   <span class="chevron" id="generatorChevron">▼</span>
-  </button>
-  <div class="generator-content hidden" id="generatorContent">
-   <p class="generator-desc">Create personalized invitation links for your guests. Each link greets the guest by name and pre-fills their details in the RSVP.</p>
-   <div class="generator-row">
-    <input type="text" id="hostGuestInput" placeholder="Enter guest name (e.g. Rahul Sharma)">
-    <button type="button" class="gold-btn-sm" id="btnGenerateLink">Generate Link ✦</button>
-   </div>
-   <div class="generator-result hidden" id="generatorResult">
-    <label for="generatedLinkOutput">Personalized Invitation Link:</label>
-    <div class="copy-box">
-     <input type="text" id="generatedLinkOutput" readonly>
-     <button type="button" class="copy-btn" id="btnCopyLink">Copy 📋</button>
-    </div>
-    <div class="generator-actions">
-     <a id="btnShareWhatsApp" href="#" target="_blank" rel="noopener noreferrer" class="wa-share-btn">Share via WhatsApp 💬</a>
-     <a id="btnPreviewLink" href="#" target="_blank" rel="noopener noreferrer" class="preview-btn">Preview Guest View ↗</a>
-    </div>
-   </div>
+  <h3 class="personalized-greeting" id="guestGreetingTitle">Dear <span id="guestDisplayName">Rahul Sharma</span> ❤️</h3>
+  <div class="gold-line"></div>
+  <p class="copy" style="margin:16px auto 12px;color:#f5dfba">With great joy and love in our hearts, we cordially invite you to celebrate the wedding union of</p>
+  <h3 style="font-size:clamp(1.8rem,4.5vw,2.5rem);font-style:italic;font-weight:400;color:#ffe3a0;margin:6px 0 16px">Hozaifa Sheikh &amp; Nayema</h3>
+  <div style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:18px 0;font-size:.95rem;color:var(--gold)">
+   <div><strong>Date:</strong> 19 November 2026</div>
+   <div>•</div>
+   <div><strong>Day:</strong> Thursday</div>
+   <div>•</div>
+   <div><strong>Occasion:</strong> Nikah &amp; Reception</div>
   </div>
+  <p class="copy" style="font-size:.9rem;color:#f3dcae;margin:14px auto 0;line-height:1.75">Your warm presence, prayers, and blessings will make our special day truly memorable as we begin our forever together.</p>
  </div>
 </div></section>
 <footer>With love, Hozaifa Sheikh &amp; Nayema · Thank you for being part of our special day ♡</footer>
@@ -212,19 +190,16 @@ function parseGuestName() {
 let currentGuestName = parseGuestName();
 
 function updateGuestUI(name) {
-  currentGuestName = name ? name.trim() : '';
-  const display = currentGuestName || 'Esteemed Guest';
+  const display = name ? name.trim() : 'Esteemed Guest';
   const displayEl = document.getElementById('guestDisplayName');
-  const btnNameEl = document.getElementById('btnGuestName');
   const introBadge = document.getElementById('introGuestBadge');
   const introName = document.getElementById('introGuestName');
 
   if (displayEl) displayEl.textContent = display;
-  if (btnNameEl) btnNameEl.textContent = currentGuestName || 'you';
 
   if (introBadge && introName) {
-    if (currentGuestName) {
-      introName.textContent = currentGuestName;
+    if (name && name.trim()) {
+      introName.textContent = name.trim();
       introBadge.classList.remove('hidden');
     } else {
       introBadge.classList.add('hidden');
@@ -233,118 +208,6 @@ function updateGuestUI(name) {
 }
 
 updateGuestUI(currentGuestName);
-
-const changeGuestBtn = document.getElementById('changeGuestBtn');
-if (changeGuestBtn) {
-  changeGuestBtn.addEventListener('click', () => {
-    const entered = prompt('Please enter your name:', currentGuestName || '');
-    if (entered !== null && entered.trim()) {
-      updateGuestUI(entered.trim());
-    }
-  });
-}
-
-document.getElementById('rsvpForm').addEventListener('submit', event => {
-  event.preventDefault();
-  const form = new FormData(event.currentTarget);
-  const guestName = currentGuestName || 'Valued Guest';
-  const attendance = form.get('attendance');
-  const guestCount = form.get('guestCount');
-  const guestMessage = form.get('message');
-
-  const messageLines = [
-    'Wedding RSVP — Hozaifa Sheikh & Nayema',
-    'Wedding Date: 19 November 2026',
-    '----------------------------------',
-    'Guest Name: ' + guestName,
-    'Attendance: ' + attendance,
-    'Number of Guests: ' + guestCount
-  ];
-  if (guestMessage && guestMessage.trim()) {
-    messageLines.push('Message: ' + guestMessage.trim());
-  }
-
-  const message = messageLines.join('\n');
-  if (RSVP_WHATSAPP) {
-    window.open('https://wa.me/' + RSVP_WHATSAPP + '?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
-  } else {
-    window.open('https://wa.me/?text=' + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
-  }
-});
-
-// Host Tool: Generate Guest Invitation Links
-const toggleGenBtn = document.getElementById('toggleGenerator');
-const genContent = document.getElementById('generatorContent');
-const genChevron = document.getElementById('generatorChevron');
-if (toggleGenBtn && genContent) {
-  toggleGenBtn.addEventListener('click', () => {
-    const isClosed = genContent.classList.contains('hidden');
-    if (isClosed) {
-      genContent.classList.remove('hidden');
-      toggleGenBtn.setAttribute('aria-expanded', 'true');
-      if (genChevron) genChevron.textContent = '▲';
-    } else {
-      genContent.classList.add('hidden');
-      toggleGenBtn.setAttribute('aria-expanded', 'false');
-      if (genChevron) genChevron.textContent = '▼';
-    }
-  });
-}
-
-const btnGenerateLink = document.getElementById('btnGenerateLink');
-const hostGuestInput = document.getElementById('hostGuestInput');
-const generatorResult = document.getElementById('generatorResult');
-const generatedLinkOutput = document.getElementById('generatedLinkOutput');
-const btnCopyLink = document.getElementById('btnCopyLink');
-const btnShareWhatsApp = document.getElementById('btnShareWhatsApp');
-const btnPreviewLink = document.getElementById('btnPreviewLink');
-
-function generatePersonalizedLink() {
-  const rawName = hostGuestInput.value.trim();
-  if (!rawName) {
-    alert('Please enter a guest name to generate a link.');
-    hostGuestInput.focus();
-    return;
-  }
-  const baseUrl = (window.location.origin && window.location.origin !== 'null')
-    ? `${window.location.origin}${window.location.pathname}`
-    : window.location.href.split('?')[0].split('#')[0];
-  const personalizedLink = `${baseUrl}?guest=${encodeURIComponent(rawName)}#rsvp`;
-
-  generatedLinkOutput.value = personalizedLink;
-  generatorResult.classList.remove('hidden');
-
-  const shareMsg = `Dear ${rawName}, you are cordially invited to celebrate the wedding of Hozaifa Sheikh & Nayema! Please view your personalized invitation and RSVP here:\n${personalizedLink}`;
-  btnShareWhatsApp.href = `https://wa.me/?text=${encodeURIComponent(shareMsg)}`;
-  btnPreviewLink.href = personalizedLink;
-}
-
-if (btnGenerateLink) {
-  btnGenerateLink.addEventListener('click', generatePersonalizedLink);
-}
-if (hostGuestInput) {
-  hostGuestInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      generatePersonalizedLink();
-    }
-  });
-}
-
-if (btnCopyLink) {
-  btnCopyLink.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(generatedLinkOutput.value);
-      btnCopyLink.textContent = 'Copied! ✓';
-      setTimeout(() => { btnCopyLink.textContent = 'Copy 📋'; }, 2000);
-    } catch {
-      generatedLinkOutput.select();
-      document.execCommand('copy');
-      btnCopyLink.textContent = 'Copied! ✓';
-      setTimeout(() => { btnCopyLink.textContent = 'Copy 📋'; }, 2000);
-    }
-  });
-}
 
 // Decorative petals respect reduced-motion settings.
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
