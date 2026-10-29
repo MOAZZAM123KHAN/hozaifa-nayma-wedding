@@ -184,7 +184,7 @@ function handleGenerate() {
 
   const base = getBaseUrl();
   const inviteUrl = `${base}/?guest=${encodeURIComponent(name)}#rsvp`;
-  const shareMessage = `Dear ${name} ❤️,\n\nWe joyfully invite you to celebrate the wedding of Hozaifa Sheikh & Nayema!\n\nPlease view your personal invitation here:\n${inviteUrl}\n\nWith love,\nHozaifa & Nayema`;
+  const shareMessage = `Dear ${name} ❤️,\n\nWe joyfully invite you and your family to celebrate the wedding of Hozaifa Sheikh & Nayema!\n\n✦ Nikah: Wednesday, 18 Nov 2026 at 12:30 PM (Sahijana, Azamgarh)\n✦ Waleema: Thursday, 19 Nov 2026 at 11:00 AM (Khurshida Health Clinic, Mamoon Nagar, Baraipur, Azamgarh)\n\nPlease view your personal invitation & Google Maps directions here:\n${inviteUrl}\n\nWith love,\nHozaifa & Nayema`;
   const waUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
 
   previewGreeting.textContent = `Dear ${name} ❤️`;
