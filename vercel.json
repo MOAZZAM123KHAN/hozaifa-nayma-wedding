@@ -2,12 +2,12 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/rsvp",
-      "destination": "/index.html"
-    },
-    {
       "source": "/host",
       "destination": "/host.html"
+    },
+    {
+      "source": "/rsvp",
+      "destination": "/index.html"
     }
   ]
 }
