@@ -1,0 +1,6 @@
+.vercel
+node_modules
+*.log
+inspect.js
+inspect2.js
+extract_info.py

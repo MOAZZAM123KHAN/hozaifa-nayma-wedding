@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/rsvp",
+      "destination": "/index.html"
+    }
+  ]
+}
